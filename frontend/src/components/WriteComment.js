@@ -25,7 +25,7 @@ const WriteComment =(probs) =>{
         e.preventDefault();    
         if (comment.commentText !== ""){
         try {
-            const request = 'http://127.0.0.1:5000/api/addReview?' + new URLSearchParams({
+            const request = 'http://127.0.0.1:8000/api/addReview?' + new URLSearchParams({
                 text: comment.commentText,     
                 service_id: probs.service_id,
                 user_id: probs.user_id 

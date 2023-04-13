@@ -38,7 +38,7 @@ const AddService = () => {
 
       }).join('~~~');
 
-      const request = 'http://127.0.0.1:5000/api/addServices?' + new URLSearchParams({
+      const request = 'http://127.0.0.1:8000/api/addServices?' + new URLSearchParams({
         name: Service.name,
         sector: Service.sector,
         street: Service.street,

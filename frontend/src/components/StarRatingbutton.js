@@ -19,7 +19,7 @@ const StarRatingButton = (probs) =>{
 
       const getUserRating = async () => {
           try {
-              const request = 'http://127.0.0.1:5000/api/getUserRating?' + new URLSearchParams({
+              const request = 'http://127.0.0.1:8000/api/getUserRating?' + new URLSearchParams({
               user_id: probs.user_id,
               s_id: probs.serviceId
               });
@@ -45,7 +45,7 @@ const StarRatingButton = (probs) =>{
         setRating(index);
         console.log(hover)
         try {
-            const request = 'http://127.0.0.1:5000/api/addStarRating/?' + new URLSearchParams({
+            const request = 'http://127.0.0.1:8000/api/addStarRating/?' + new URLSearchParams({
                 user_id: probs.user_id, 
                 service_id: serviceId,
                 rating: hover

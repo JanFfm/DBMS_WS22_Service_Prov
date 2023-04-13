@@ -17,7 +17,7 @@ const CounterButton = (probs) =>{
         //send voting to api
         const sendVoting = async (r_id, user_id ) =>{
         try {
-            const request = 'http://127.0.0.1:5000/api/addUsefullness/?' + new URLSearchParams({
+            const request = 'http://127.0.0.1:8000/api/addUsefullness/?' + new URLSearchParams({
                 user_id: user_id, 
                 r_id: r_id,
               });

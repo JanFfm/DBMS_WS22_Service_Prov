@@ -27,13 +27,13 @@ const GetServices = () =>{
                 try {
                     var request = ""
                     if (type==="name"){
-                        request = 'http://127.0.0.1:5000/api/getServices?' + new URLSearchParams({
+                        request = 'http://127.0.0.1:8000/api/getServices?' + new URLSearchParams({
                             name: keyword,
                             });                    
                     }
 
                     else if (type==="sector") {
-                        request = 'http://127.0.0.1:5000/api/getServicesBySector?' + new URLSearchParams({
+                        request = 'http://127.0.0.1:8000/api/getServicesBySector?' + new URLSearchParams({
                             sector: keyword,
                             });
 
@@ -46,7 +46,7 @@ const GetServices = () =>{
                         }}) ;
 
                     console.log("res", res)
-                    setServices(res)}                    
+                    setServices(res.data)}                    
                      
                  catch (error) {
                     console.log("error", error); 
@@ -84,7 +84,9 @@ const GetServices = () =>{
                 </div>
     }
     //if no nersices found, show error msg and similar keywords
-    catch {
+    catch (error) {
+        console.log(error)
+        console.log(typeof services)
         return <><h2>No services found</h2>
         <FuzzyWordsList queryType={type} response={services.data}></FuzzyWordsList>
         <br /><br />

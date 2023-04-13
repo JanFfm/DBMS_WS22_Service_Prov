@@ -33,7 +33,7 @@ const Rating = (probs) => {
         else{
             const fetchRatings = async () => {
                 try {
-                    const request = 'http://127.0.0.1:5000/api/getStarRatingByID?' + new URLSearchParams({
+                    const request = 'http://127.0.0.1:8000/api/getStarRatingByID?' + new URLSearchParams({
                                     service_id: probs.service_id})
         
                                     console.log("Api request: ", request);
