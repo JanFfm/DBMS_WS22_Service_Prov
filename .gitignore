@@ -1,5 +1,6 @@
 .vscode
 __pycache__
+venv
 frontend/package-lock.json
 frontend/src/pages/login3.js
 frontend/src/components/Login/Login_copy.css
