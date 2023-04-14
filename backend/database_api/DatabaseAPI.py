@@ -1,6 +1,8 @@
+from django.db.models import Q
 from pymongo import MongoClient
 from hashlib import md5
 from Levenshtein import distance as dist
+from user.models import MyUser
 
 
 def fuzzy_word_similarity(search_string:str, documents:list) -> list:
@@ -35,7 +37,7 @@ class Database:
             pw_hash = pw
         else:
             pw_hash = md5(pw.encode()).hexdigest()
-        return self.db.User.find_one({'login': login, 'pw': pw_hash})
+        return MyUser.objects.get({'login': login, 'pw': pw_hash})
 
     def get_user_by_id(self, uid) -> dict:
         """Returns informations about a user identified by id
@@ -46,7 +48,13 @@ class Database:
         Returns:
             dict: user information
         """
-        return self.db.User.find_one({'uid': uid})
+        try:
+            user = MyUser.objects.filter({id: int(uid)})[0]
+        except:
+            user= None
+        print(user)
+   
+        return  user
 
     def get_user_data(self, login: str, pw: str) -> dict:
         """Get user information as dict. But not pw."""
@@ -56,11 +64,11 @@ class Database:
 
     def set_user(self,  login_name: str, pwd:str) -> bool:
         """add new user"""
-        user_exists = self.db.User.count_documents({"login":login_name })
+        user_exists = MyUser.objects.filter({"login":login_name }).count()
         if not(user_exists):
-            user_id = self.db.User.find().sort('uid', -1).limit(1)[0]['uid'] + 1
+            user_id = MyUser.objects.all().sort('uid', -1).limit(1)[0]['uid'] + 1
             password = md5(pwd.encode()).hexdigest()
-            self.db.User.insert_one({"uid": user_id, "login": login_name, "pw":password})
+            MyUser.objects.create({"uid": user_id, "login": login_name, "pw":password})
             return True
         else:
             return False 
@@ -137,7 +145,7 @@ class Database:
         service_id from user with given user_id
         """
         review_id = self.db.Reviews.find().sort('rid', -1).limit(1)[0]['rid'] + 1
-        user_name = self.db.User.find({"uid":user_id})[0]["login"]
+        user_name = MyUser.objects.get({"uid":user_id})[0]["login"]
         data = {"rid":review_id,"user_id":user_id, "login_user": user_name, "text":text, "id_service": service_id, 'usefulness_rate':[]}
 
         self.db.Reviews.insert_one(data)

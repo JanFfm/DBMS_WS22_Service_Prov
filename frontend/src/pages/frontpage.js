@@ -13,7 +13,7 @@ const  FrontPage = (probs) => {
   const getUserName = async () => {
     try {
       const request = 'http://127.0.0.1:8000/api/getUserName?' + new URLSearchParams({
-        user_id: probs.token,
+        user_id: 1,
         });
         const res = await axios.get(request,{
           headers: {

@@ -4,15 +4,15 @@ from . import views
 urlpatterns = [
     #get requests:
     path("getServices/", views.GetServices.as_view(), name="getServices"),
-    path("getServicesBySector/", views.getServicesBySector , name="getServicesBySector"),
+    path("getServicesBySector/", views.GetServiceBySector.as_view() , name="getServicesBySector"),
     path("getServiceById/", views.GetServiceById.as_view() , name="getServiceById"),
-    path("getStarRatingByID/", views.get_star_rating_by_service_id , name="getStarRatingByID"),
-    path("getUserRating/", views.get_star_rating_by_user_id , name="getUserRating"),
-    path("getUserName/", views.get_user_name , name="getUserName"),    
+    path("getStarRatingByID/", views.GetStarRatingByServiceID.as_view() , name="getStarRatingByID"),
+    path("getUserRating/", views.GetStarRatingByUserID.as_view() , name="getUserRating"),
+    path("getUserName/", views.GetUserName.as_view() , name="getUserName"),    
     #post requests:
-    path("addServices/", views.addServices , name="addServices"),
-    path("addReview/", views.add_review , name="addReview"),
-    path("addStarRating/", views.add_star_rating_to_service , name="addStarRating"),
-    path("addUsefullness/", views.update_usefulness_rate , name="addUsefullness"),
-    path("add_new_user/", views.add_new_user , name="add_new_user"),
+    path("addServices/", views.AddService.as_view() , name="addServices"),
+    path("addReview/", views.AddReview.as_view() , name="addReview"),
+    path("addStarRating/", views.AddStarRatingToService.as_view() , name="addStarRating"),
+    path("addUsefullness/", views.UpdateUsefullnessRate.as_view() , name="addUsefullness"),
+    path("add_new_user/", views.AddNewUser.as_view() , name="add_new_user"),
 ]

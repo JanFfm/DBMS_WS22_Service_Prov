@@ -61,6 +61,7 @@ const GetServices = () =>{
 
     //show result list:
     try{  
+        console.log("services:",services)
             return <div>
                 <h1>Your results for the {type} "{keyword}":</h1>
                 <br />
@@ -77,7 +78,7 @@ const GetServices = () =>{
                         </tr>
                 </thead>
                 <tbody>
-                {services.data[0].map((s) =><tr><td>{s.sid}</td><td>{s.name}</td><td>{s.sector}</td><td>{s.address[0].street} {s.address[0].number}, {s.address[0].city}</td><td><Rating service_id={s.sid}/></td><td><DetailsButton id={s.sid}/></td></tr>  )}
+                {services.map((s) =><tr><td>{s.sid}</td><td>{s.name}</td><td>{s.sector}</td><td>{s.address[0].street} {s.address[0].number}, {s.address[0].city}</td><td><Rating service_id={s.sid}/></td><td><DetailsButton id={s.sid}/></td></tr>  )}
                 </tbody>
                 </table>
                 </div> 
@@ -88,7 +89,7 @@ const GetServices = () =>{
         console.log(error)
         console.log(typeof services)
         return <><h2>No services found</h2>
-        <FuzzyWordsList queryType={type} response={services.data}></FuzzyWordsList>
+        <FuzzyWordsList queryType={type} response={services}></FuzzyWordsList>
         <br /><br />
         <p><Link to ="/search"><button type="button" class="btn btn-secondary">Go back</button></Link>   <Link to ="/addService"><button type="button" class="btn btn-secondary">Create a new service</button></Link><br />
         </p> </>

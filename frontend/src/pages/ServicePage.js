@@ -48,6 +48,7 @@ const ServicePage =  (probs) =>{
 
                 //setService(res.data)
                 setName(res.data.name)
+                console.log(res)
                 setSector(res.data.sector)
                 setIphash(res.data.ip_hash)
                 setAddres(res.data.address)
@@ -95,6 +96,7 @@ const ServicePage =  (probs) =>{
 
         
     } catch (error) {
+        console.log(error)
         return <h2>Page not found.</h2>
     }
 
